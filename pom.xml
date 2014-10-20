@@ -313,6 +313,7 @@
         <version>3.2</version>
         <configuration>
           <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+          <skipEmptyReport>false</skipEmptyReport>
           <targetJdk>${jdk.version}</targetJdk>
         </configuration>
       </plugin>
