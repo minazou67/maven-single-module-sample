@@ -187,7 +187,7 @@
         <version>0.7.2.201409121644</version>
         <executions>
           <execution>
-            <phase>site</phase>
+            <id>default-prepare-agent</id>
             <goals>
               <goal>prepare-agent</goal>
             </goals>
@@ -197,6 +197,13 @@
                 <include>${jacoco.include.package}</include>
               </includes>
             </configuration>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
