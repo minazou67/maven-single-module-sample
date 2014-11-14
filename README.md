@@ -27,4 +27,5 @@ This is a sample of Maven single-module.
   * Checkstyle
   * FindBugs
   * NCSS
+  * JDepend
   * PMD
