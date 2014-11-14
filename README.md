@@ -5,13 +5,13 @@ This is a sample of Maven single-module.
 
 # Overview
 
-* issueManagement
-* developers
-* scm
-* organization
-* licenses
-* dependencies
-* build
+* IssueManagement
+* Developers
+* SCM
+* Organization
+* Licenses
+* Dependencies
+* Build
   * Compiler
   * Resources
   * Jar
