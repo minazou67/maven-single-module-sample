@@ -14,6 +14,8 @@ This is a sample of Maven single-module.
 * Build
   * Compiler
   * Resources
+    * LICENSE
+    * NOTICE
   * Jar
   * Attach Source
   * Attach JavaDoc
@@ -29,3 +31,4 @@ This is a sample of Maven single-module.
   * NCSS
   * JDepend
   * PMD
+  * Tag List
