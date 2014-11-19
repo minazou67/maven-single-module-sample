@@ -20,7 +20,7 @@ This is a sample of Maven single-module.
     * LICENSE
     * NOTICE
   * Jar
-  * Attach Source
+  * Attach Sources
   * Attach JavaDoc
   * Site
 * Reporting
