@@ -10,6 +10,9 @@ This is a sample of Maven single-module.
 * SCM
 * Organization
 * Licenses
+* Properties
+  * JDK 1.7
+  * Encoding UTF-8
 * Dependencies
 * Build
   * Compiler
