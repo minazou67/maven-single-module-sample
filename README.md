@@ -1,4 +1,4 @@
-Maven single-module sample
+Maven single-module samples
 ==========================
 
 This is a sample of Maven single-module.
