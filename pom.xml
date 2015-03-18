@@ -1,55 +1,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+
+  <!-- The Basics -->
   <groupId>org.minazou67</groupId>
   <artifactId>maven-single-module-samples</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>maven-single-module-samples</name>
-  <url>https://github.com/minazou67/maven-single-module-samples</url>
-  <description>This is a sample of a single module of the Maven project.</description>
-  <inceptionYear>2014</inceptionYear>
-
-  <issueManagement>
-    <system>GitHub</system>
-    <url>https://github.com/minazou67/maven-single-module-samples/issues</url>
-  </issueManagement>
-
-  <developers>
-    <developer>
-      <name>minazou67</name>
-      <email>minazou67@gmaol.com</email>
-    </developer>
-  </developers>
-
-  <scm>
-    <url>scm:git:git://github.com/minazou67/maven-single-module-samples.git</url>
-    <connection>scm:git:git://github.com/minazou67/maven-single-module-samples.git</connection>
-    <developerConnection>scm:git:git://github.com/minazou67/maven-single-module-samples.git</developerConnection>
-  </scm>
-
-  <organization>
-    <name>minazou67</name>
-    <url>https://github.com/minazou67</url>
-  </organization>
-
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>manual</distribution>
-    </license>
-  </licenses>
-
   <properties>
-    <jdk.version>1.7</jdk.version>
-    <site.locales>ja</site.locales>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <jacoco.include.package>org.minazou67.sample.maven.*</jacoco.include.package>
+    <site.locales>ja</site.locales>
+    <!-- Compiler -->
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <!-- Resources -->
+    <maven.resources.overwrite>true</maven.resources.overwrite>
+    <maven.resources.includeEmptyDirs>true</maven.resources.includeEmptyDirs>
+    <!-- Checkstyle -->
+    <checkstyle.config.location>checkstyle-checker.xml</checkstyle.config.location>
+    <!-- Findbugs -->
+    <findbugs.effort>Max</findbugs.effort>
+    <findbugs.excludeFilterFile>findbugs-exclude.xml</findbugs.excludeFilterFile>
+    <findbugs.xmlOutput>true</findbugs.xmlOutput>
     <!-- Library version -->
-    <slf4j-version>1.7.7</slf4j-version>
+    <slf4j-version>1.7.10</slf4j-version>
+    <!-- Plugin version -->
+    <javadoc-version>2.9.1</javadoc-version>
+    <jacoco-version>0.7.2.201409121644</jacoco-version>
   </properties>
 
   <dependencies>
@@ -108,7 +87,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
     <!-- Mockito -->
@@ -121,6 +100,7 @@
 
   </dependencies>
 
+  <!-- Build Settings -->
   <build>
     <plugins>
       <!-- Compiler -->
@@ -128,21 +108,12 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.5.1</version>
-        <configuration>
-          <source>${jdk.version}</source>
-          <target>${jdk.version}</target>
-          <encoding>${project.build.sourceEncoding}</encoding>
-        </configuration>
       </plugin>
       <!-- Resources -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>2.6</version>
-        <configuration>
-          <overwrite>true</overwrite>
-          <encoding>${project.build.sourceEncoding}</encoding>
-        </configuration>
       </plugin>
       <!-- Builds a Java Archive (JAR) -->
       <plugin>
@@ -176,7 +147,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
+        <version>${javadoc-version}</version>
         <configuration>
           <additionalJOption>-J-Dfile.encoding=${project.build.sourceEncoding}</additionalJOption>
         </configuration>
@@ -189,29 +160,11 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Site -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.3</version>
-        <dependencies>
-          <dependency><!-- add support for ssh/scp -->
-            <groupId>org.apache.maven.wagon</groupId>
-            <artifactId>wagon-ssh</artifactId>
-            <version>2.8</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <locales>${site.locales}</locales>
-          <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
-          <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
-        </configuration>
-      </plugin>
       <!-- JaCoCo -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.7.2.201409121644</version>
+        <version>${jacoco-version}</version>
         <executions>
           <execution>
             <id>default-prepare-agent</id>
@@ -220,9 +173,6 @@
             </goals>
             <configuration>
               <propertyName>jacoco.agent.argLine</propertyName>
-              <includes>
-                <include>${jacoco.include.package}</include>
-              </includes>
             </configuration>
           </execution>
           <execution>
@@ -234,16 +184,45 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Surefire -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12.4</version>
-        <configuration>
-          <argLine>-Dfile.encoding=${project.build.sourceEncoding} ${jacoco.agent.argLine}</argLine>
-        </configuration>
-      </plugin>
     </plugins>
+    <!-- Plugin management -->
+    <pluginManagement>
+      <plugins>
+        <!-- Site -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.3</version>
+          <dependencies>
+            <dependency><!-- add support for ssh/scp -->
+              <groupId>org.apache.maven.wagon</groupId>
+              <artifactId>wagon-ssh</artifactId>
+              <version>2.8</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <locales>${site.locales}</locales>
+            <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+            <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
+          </configuration>
+        </plugin>
+        <!-- Surefire -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.12.4</version>
+          <configuration>
+            <argLine>-Dfile.encoding=${project.build.sourceEncoding} ${jacoco.agent.argLine}</argLine>
+          </configuration>
+        </plugin>
+        <!-- Release -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <!-- Resources -->
     <resources>
       <!-- META-INF -->
@@ -291,30 +270,25 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
+        <version>${javadoc-version}</version>
         <configuration>
           <source>${jdk.version}</source>
           <locale>${site.locales}</locale>
           <additionalJOption>-J-Dfile.encoding=${project.build.sourceEncoding}</additionalJOption>
-          <encoding>${project.build.sourceEncoding}</encoding>
           <charset>${project.reporting.outputEncoding}</charset>
-          <docencoding>${project.reporting.outputEncoding}</docencoding>
         </configuration>
       </plugin>
       <!-- JaCoCo -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.7.2.201409121644</version>
+        <version>${jacoco-version}</version>
       </plugin>
       <!-- Checkstyle -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>2.14</version>
-        <configuration>
-          <configLocation>checkstyle-checker.xml</configLocation>
-        </configuration>
       </plugin>
       <!-- FindBugs -->
       <plugin>
@@ -322,10 +296,7 @@
         <artifactId>findbugs-maven-plugin</artifactId>
         <version>3.0.0</version>
         <configuration>
-          <effort>Max</effort>
-          <xmlOutput>true</xmlOutput>
           <findbugsXmlOutput>true</findbugsXmlOutput>
-          <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
         </configuration>
       </plugin>
       <!-- NCSS -->
@@ -346,9 +317,7 @@
         <artifactId>maven-pmd-plugin</artifactId>
         <version>3.4</version>
         <configuration>
-          <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
           <skipEmptyReport>false</skipEmptyReport>
-          <targetJdk>${jdk.version}</targetJdk>
         </configuration>
       </plugin>
       <!-- Tag List -->
@@ -384,5 +353,43 @@
       </plugin>
     </plugins>
   </reporting>
+
+  <!-- More Project Information -->
+  <name>maven-single-module-samples</name>
+  <url>https://github.com/minazou67/maven-single-module-samples</url>
+  <description>This is a sample of a single module of the Maven project.</description>
+  <inceptionYear>2014</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>https://github.com/minazou67/maven-single-module-samples/blob/master/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>minazou67</name>
+    <url>https://github.com/minazou67</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <name>minazou67</name>
+      <email>minazou67@gmaol.com</email>
+    </developer>
+  </developers>
+
+  <!-- Environment Settings -->
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/minazou67/maven-single-module-samples/issues</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:git:git://github.com/minazou67/maven-single-module-samples.git</connection>
+    <developerConnection>scm:git:git://github.com/minazou67/maven-single-module-samples.git</developerConnection>
+    <url>scm:git:git://github.com/minazou67/maven-single-module-samples.git</url>
+  </scm>
 
 </project>
